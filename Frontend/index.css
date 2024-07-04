@@ -29,7 +29,7 @@ transform: translate(-50%, -50%);
 header {
     text-align: center;
     padding: 10px 0;
-    background-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.8);
     color: white;
 } 
  header h1 {
@@ -88,9 +88,10 @@ ul {
 footer {
     text-align: center;
     padding: 10px 0;
-    background-color: #007bff;
+    background-color: rgba(15, 30, 80, 0.4);
     color: white;
-    position: absolute;
+    position: fixed;
+    font-weight: bold;
     bottom: 0;
     width: 100%;
 }

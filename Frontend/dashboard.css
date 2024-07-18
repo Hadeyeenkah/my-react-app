@@ -1,129 +1,368 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Ga+Maamli&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antic+Slab&family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 body {
-font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow-x: hidden;
+  width: 100%;
+  font-family: "Antic Slab", serif;
+  background-color: #f0f4f8;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow-x: hidden;
+  
 }
 
+/* Navbar */
 nav {
-    background-color: rgba(0, 123, 255, 0.2);
-    backdrop-filter: blur(10px);
-    text-align: center;
-    padding: 10px 0;
-    margin-bottom: 30px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 10px 0;
+  top: 0;
 }
 nav ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 nav ul li {
-    display: inline;
-    margin-right: 20px;
+  display: inline;
+  margin-right: 20px;
 }
 nav ul li a {
-    color:  rgb(0, 123, 255);
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: 10px 15px;
-    transition: all 0.3s ease;
+  color: #DCE8FF;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
 }
 nav ul li a:hover {
-    color: rgb(240, 108, 108);
-
+  color: rgb(240, 108, 108);
 }
+
+/* Logout button */
 .logout {
-    background-color: #0e7aee;
-    color: white;
-    border-radius: 4px;
-    margin-left: 0;
+  background-color: #0e7aee;
+  color: white;
+  border-radius: 4px;
+  margin-left: 0;
 }
 
 .logout:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
+/* Dashboard */
 .dashboard {
-    width: 80%;
-    max-width: 1200px;
-    background-color: rgba(0, 123, 255, 0.2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 30px;
-    margin: auto;
+  background-image: url('./assets/images/paymate-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+.dash-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 92vh;
+  background-color: rgba(0, 0, 0, 0.815);
+
+}
+.dashtext {
+  padding-left: 10px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  color: #B5DDFF;
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  font-size: 3em;
+  font-style: normal;
+}
+.slogan {
+  color: #FFD988;
+  font-family: "Edu AU VIC WA NT Hand", cursive;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  margin: 0 auto;
+}
+.dash-img {
+  width: 100%; /* Set the image width to 100% of its container */
+  max-width: 600px; /* Optionally set a maximum width */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensure it behaves as a block element */
+  margin: 0 auto;
+}
+.app{
+  margin-bottom: 70px;
+  margin: 50px auto;
+}
+.app img {
+  width: 190px;
+  border-radius: 10px;
+  height: auto;
+  margin: 0 auto;
+  background-color: black;
 }
 
-.balance, .pay-bills, .transaction-history {
-    padding: 20px;
-    border-bottom: 1px solid #e0e0e0;
+/* Features */
+.features {
+  background-color: #f6fdff;
+  padding: 20px 0;
+  text-align: center;
 }
 
-h2 {
-    margin: 0 0 10px;
-    font-size: 1.5em;
-    color: #333;
+.features h1 {
+  margin-bottom: 20px;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+  font-style: normal;
 }
 
-h3 {
-    margin: 0;
-    font-size: 2em;
-    color: #4caf50;
+.logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 800px;
+  margin-top: 100px;
+  margin-bottom: 70px
+}
+.logos img{
+  width: 100px;
+  height: 50px;
+  margin: 10px 20px;
+  border-radius: 20px;
+  
 }
 
-.pay-bills form {
-    display: flex;
-    flex-direction: column;
-    
+/* Services */
+.services{
+  background-color: #dff7fd;
+  padding: 20px 0;
+  text-align: center;
+}
+.services h1 {
+  margin-bottom: 20px;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+  font-style: normal;
+}
+.services p{
+  font-size: 1.2em;
+  font-weight: 500;
+  margin: 0 auto;
+  max-width: 800px;
+  margin: 0 auto;
+
+}
+.card-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: 0 auto;
+  max-width: 1000px;
+  margin-top: 100px;
+  margin-bottom: 70px;
+  
+}
+.card {
+  background-color: #f4f8ff80;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-icon {
+  color: #FFD988;
+  font-weight: 900;
+  margin-bottom: 10px;
+  font-size: x-large;
 }
 
-.pay-bills label, .pay-bills select, .pay-bills input {
-    margin-bottom: 10px;
+/*  Steps  */
+.steps {
+  background-color: #fff7f777;
+  padding: 20px 0;
 }
-
-.pay-bills input[type="submit"] {
-    padding: 10px;
-    background-color: rgb(0, 123, 255);
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.steps-container{
+  display: flex;
+  margin-top: 100px;
+  margin-bottom: 70px;
+  justify-content: center;
 }
-
-.pay-bills input[type="submit"]:hover {
-    background-color: #0056b3;
+.steps-container img {
+  border: #FFD988 3px solid;
+  border-radius: 50%;
+  margin-right: 60px;
 }
-
-.transaction-history table {
-    width: 100%;
-    border-collapse: collapse;
+.steps-container h1 {
+  margin-bottom: 20px;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+  font-style: normal;
 }
-
-.transaction-history th, .transaction-history td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
+.steps-container p {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin: 0 auto;
+  max-width: 800px;
 }
-
-.transaction-history th {
-    background-color: #f5f5f5;
-}
-
-.transaction-history tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+.steps-container ol {
+  font-family:  "Edu AU VIC WA NT Hand", cursive;
 }
 
 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: rgba(15, 30, 80, 0.4);
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+/* Why choose paymate */
+.why-choose {
+  background-color: #f6fdff;
+  text-align: center;
+}
+.why-choose h1 {
+  margin-bottom: 20px;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+  font-style: normal;
+  align-items: center;
+}
+.reasons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: 0 auto;
+  max-width: 1000px;
+  margin-top: 100px;
+  margin-bottom: 70px;
+}
+.reason {
+  background-color: #dbf6ff70 ;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  flex-direction: column;
+  align-items: center;
+
+
+}
+.reason i {
+  margin: 0px auto;
+  background-color: #FFD988;
+  width: 50px;
+  height: 40px;
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  
+}
+
+/* Testimonials */
+.testimonials {
+  background-color: #f6fdff;
+  padding: 20px 0;
+  text-align: center;
+}
+.testimonials h1 {
+  margin-bottom: 20px;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+  font-style: normal;
+}
+.testimonials-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: 0 auto;
+  max-width: 1000px;
+  margin-top: 100px;
+  margin-bottom: 70px;
+}
+.testimonials-container img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  object-fit: cover;
+}
+.testimonial {
+  background-color: #fff7f777;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+/* FAQ */
+.faq-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.faq-container h1 {
+  margin-bottom: 20px;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-size: 3em;
+  font-style: normal;
+}
+
+.question {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.question-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #7bdef7;
+  color: white;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s;
+}
+
+.question-btn:hover {
+  background-color: #16c8f5;
+}
+
+.answer {
+  display: none; /* Hide answers by default */
+}
+
+.answer p {
+  padding: 15px ;
+  margin: 0;
+}
+
+ footer {
+  margin-top: 100px;
+  background-color: #01070ebd;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
 }

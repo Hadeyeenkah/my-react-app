@@ -19,6 +19,8 @@ app.use(bodyParser.json());
 
 connectDB();
 
+app.options('*', cors(corsOptions));
+
 app.use('/api/users', require('./routes/userRoute'));
 
 app.use(errorHandler)

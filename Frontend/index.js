@@ -76,7 +76,7 @@ $(document).ready(function() {
                 throw new Error('Registration failed');
             }
             else {
-               
+                console.log('Registration successful:', response);
                 alert('Thank you for signing up');
                 window.location.href = './dashboard.html';
             }

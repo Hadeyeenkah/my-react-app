@@ -8,7 +8,13 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const errorHandler = require('./middlewares/errorHandler');
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN,
+  optionsSuccessStatus: 200
+};
+
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 connectDB();

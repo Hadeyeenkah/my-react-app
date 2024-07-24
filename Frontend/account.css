@@ -1,0 +1,145 @@
+
+  .purchase-history table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .purchase-history th, .purchase-history td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #be3589;
+  }
+  .purchase-history th {
+    background-color: #7d1c63;
+    color: rgb(199, 189, 189);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  th, td {
+    padding: 12px;
+    border: 1px solid #dddddd;
+    text-align: left;
+  }
+  th {
+    background-color: #007bff;
+    color: #ffffff;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  /* Navbar */
+nav {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 10px 0;
+    top: 0;
+  }
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  nav ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+  nav ul li a {
+    color: #DCE8FF;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+  }
+  nav ul li a:hover {
+    color: rgb(240, 108, 108);
+  }
+  
+  /* Logout button */
+  .logout {
+    background-color: #0e7aee;
+    color: white;
+    border-radius: 4px;
+    margin-left: 0;
+  }
+  .logout:hover {
+    background-color: #0056b3;
+  }
+  .container {
+    background-color: #e6f7ff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.balance-section, .pay-bills-section {
+    margin-bottom: 20px;
+}
+
+.balance-section h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.balance-amount {
+    font-size: 28px;
+    color: #28a745;
+    margin: 10px 0 0;
+}
+
+.pay-bills-section h2 {
+    margin: 0;
+    font-size: 24px;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0 5px;
+    font-size: 14px;
+}
+
+select, input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.welcome-container {
+  text-align: center;
+}
+
+.welcome-message {
+  font-size: 2em;
+  opacity: 0;
+  animation: fadeIn 7s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+      opacity: 1;
+  }
+}

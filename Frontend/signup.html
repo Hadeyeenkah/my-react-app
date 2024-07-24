@@ -1,0 +1,55 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./signup.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="./signup.js"></script>
+  </head>
+  <body>
+    <video autoplay muted loop class="video-background" id="bg-video">
+      <source src="assets/videos/background-vedio.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <header>
+        <h1>Welcome to PayMate</h1>
+    </header>
+    
+    <div class="login-box" id="login">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label for="email">Email</label>
+        <input type="email" id="login-email" name="email" required />
+        <label for="password">Password</label>
+        <input type="password" id="login-password" name="password" required />
+        <input type="submit" value="Login" />
+      </form>
+      <p>
+        Don't have an account?
+        <a href="#signup" >Sign Up</a>
+      </p>
+    </div>
+
+    <div class="login-box" id="signup">
+      <h2>Sign Up</h2>
+      <form id="signupForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+        <label for="email">Email</label>
+        <input type="email" id="signup-email" name="email" required />
+        <label for="password">Password</label>
+        <input type="password" id="signup-password" name="password" required />
+        <input type="submit" value="Sign Up" />
+      </form>
+      <p>
+        Already have an account?
+        <a href="#login" onclick="toggleForm('login')">Login</a>
+      </p>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 PayMate</p>
+    </footer>
+</body>
+</html>

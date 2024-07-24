@@ -93,11 +93,5 @@ const userController =  {
     getMe: asyncHandler(async(req,res) => {
         res.status(201).json(req.user);
     })
-
 };
-
-
-
-
 module.exports = userController;
-

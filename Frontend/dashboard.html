@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./index.js"></script>
+    <script src="./dashboard.js"></script>
+    <link rel="stylesheet" href="./dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <main>
+      <section class="dashboard">
+        <nav class="header">
+          <ul class="list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#brands">Brands</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#" class="logout" id="logoutBtn">Logout</a></li>
+          </ul>
+        </nav>
+
+        <div class="dash-container" id="home">
+          <div class="dashtext">
+            <h1 class="title">Your all in one payment solution</h1>
+            <h2 class="slogan">Get more done in minutes</h2>
+            <div class="app">
+              <img src="./assets/images/google.png" alt="google" />
+              <img src="./assets/images/apple.png" alt="apple" />
+            </div>
+          </div>
+          <img
+            src="./assets/images/Online_Bill_Payment-removebg-preview.png"
+            class="dash-img"
+            alt="bill"
+          />
+        </div>
+      </section>
+
+      <!-- Features section -->
+      <section class="features" id="brands">
+        <h1>
+          Over
+          <span style="color: #f5c358; font-weight: 900">15+ </span> service
+          provider brands <br />
+          connected to PayMate
+        </h1>
+        <p
+          style="
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #c9921d;
+          "
+        >
+          PayMate is a one-stop solution for all your payment needs.
+        </p>
+        <div class="logos">
+          <img src="./assets/images/airtel.png" alt="airtel" />
+          <img src="./assets/images/mtn.png" alt="mtn" />
+          <img src="./assets/images/glo.png" alt="glo" />
+          <img src="./assets/images/9mobile.png" alt="9mobile" />
+          <img src="./assets/images/ikeja-electric.png" alt="ikeja-electric" />
+          <img src="./assets/images/kplc.png" alt="kplc" />
+          <img src="./assets/images/dstv.png" alt="dstv" />
+          <img src="./assets/images/nairabet.png" alt="nairabet" />
+          <img src="./assets/images/startimes.png" alt="startimes" />
+          <img src="./assets/images/gotv.png" alt="gotv" />
+          <img src="./assets/images/netflix.png" alt="netflix" />
+          <img src="./assets/images/ibedc.png" alt="showmax" />
+          <img src="./assets/images/nwco.png" alt="ibed" />
+          <img src="./assets/images/ekedc.png" alt="ekedc" />
+          <img src="./assets/images/smile.png" alt="smile" />
+        </div>
+      </section>
+
+      <!-- Services section -->
+      <section class="services" id="services">
+        <h1>Our <span style="color:#f5c358;">Services</span></h1>
+        <p>
+          Pay all your bills at once, without leaving your home with PayMate's
+          comprehensive range of services.
+        </p>
+
+        <div class="card-container">
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Electric Bills</h2>
+              <p class="card-text">Sort your electric bills using PayMate</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-water"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Water Bills</h2>
+              <p class="card-text">Pay your water bills with PayMate</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Phone Bills</h2>
+              <p class="card-text">Pay your phone bills with PayMate</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-credit-card"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Credit Card Bills</h2>
+              <p class="card-text">Pay your credit card bills with PayMate</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-regular fa-comments"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Airtime Topup</h2>
+              <p class="card-text">Pay your airtime using PayMate</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-tv"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Netflix or Showmax subscriptions</h2>
+              <p class="card-text">
+                Never miss your favorite shows again! Subscribe to Showmax with
+                PayMate and enjoy unlimited access to top-rated TV series,
+                movies, and more
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Food Delivery</h2>
+              <p class="card-text">
+                Order food from your favorite restaurants and pay with PayMate
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-shopping-cart"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Online Shopping</h2>
+              <p class="card-text">Shop online and pay with PayMate</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-umbrella"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Insurance</h2>
+              <p class="card-text">Pay your insurance premiums with PayMate</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">School Fees</h2>
+              <p class="card-text">Pay your child's school fees with PayMate</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How to use paymate -->
+      <section class="steps">
+        <div class="steps-container">
+          <img src="./assets/images/phone.png" alt="phone" />
+          <div class="steps-text">
+            <h1>How to use <span style="color:#f5c358">PayMate</span></h1>
+            <p>
+              PayMate is a simple and easy-to-use platform that allows you to
+              pay all your bills in one place. Here's how to get started:
+            </p>
+            <ol>
+              <li>Sign up for an account on PayMate</li>
+              <li>
+                Link your bank account or credit card to your PayMate account
+              </li>
+              <li>Select the bill you want to pay</li>
+              <li>Enter the amount you want to pay</li>
+              <li>Click "Pay" and you're done!</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- why choose paymate -->
+        <div class="why-choose">
+          <h1>Here's why you should <span style="color: #f5c358;">choose PayMate</span></h1>
+          <p style="font-weight: 500; font-size: 1.2em;">
+            PayMate is the best payment solution for all your needs. Here are
+            some reasons why you should choose PayMate:
+          </p>
+          <div class="reasons">
+            <div class="reason">
+              <i class="fa-solid fa-check-double"></i>
+              <p>
+                <span style="font-size: 1.4em; font-weight: 700; color: #f0b942;">Convenience:</span> Pay all your bills in one place without having to
+                go to multiple websites
+              </p>
+            </div>
+            <div class="reason">
+              <i class="fa-solid fa-check-double"></i>
+              <p><span style="font-size: 1.4em; font-weight: 700; color: #f0b942;">Security:</span> Your information is safe and secure with PayMate</p>
+            </div>
+            <div class="reason">
+              <i class="fa-solid fa-check-double"></i>
+              <p><span style="font-size: 1.4em; font-weight: 700; color: #f0b942;">Speed:</span> Pay your bills in minutes with PayMate</p>
+            </div>
+            <div class="reason">
+              <i class="fa-solid fa-check-double"></i>
+              <p>
+                <span style="font-size: 1.4em; font-weight: 700; color: #f0b942;">Customer Service: </span>Our customer service team is always available
+                to help you with any questions or concerns
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="testimonials">
+        <h1>What <span style="color:#f5c358">our customers</span> are saying</h1>
+        <div class="testimonials-container">
+          <div class="testimonial">
+            <img src="./assets/images/man.jpeg" alt="user" />
+            <p>
+              PayMate has made my life so much easier. I can pay all my bills in
+              one place without having to go to multiple websites. I love it!
+            </p>
+            <h2 style="font-family:  'Edu AU VIC WA NT Hand', cursive; font-size: 0.8em; color: #f5c358;">John Doe</h2>
+          </div>
+          <div class="testimonial">
+            <img src="./assets/images/woman.jpeg" alt="user" />
+            <p>
+              PayMate is the best thing that has ever happened to me. I can pay
+              all my bills in one place without any hassle. I highly recommend
+              it!
+            </p>
+            <h2 style="font-family:  'Edu AU VIC WA NT Hand', cursive; font-size: 0.8em; color: #f5c358;">Jane Doe</h2>
+          </div>
+          <div class="testimonial">
+            <img src="./assets/images/muslim.jpeg" alt="user" />
+            <p>
+              PayMate has saved me so much time and effort. I can pay all my
+              bills in one place without any hassle. I love it!
+            </p>
+            <h2 style="font-family:  'Edu AU VIC WA NT Hand', cursive; font-size: 0.8em; color: #f5c358;">Jamil Doe</h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- Frequently asked questions -->
+      <section class="faq" id="faq">
+        <div class="faq-container">
+          <h1>Frequently Asked <span style="color: #f5c358;">Questions</span></h1>
+          <div class="question">
+            <button class="question-btn">How do I sign up for PayMate?</button>
+            <div class="answer">
+              <p>
+                Signing up for PayMate is easy! Just go to our website and click
+                on the "Sign Up" button. You will be asked to enter your email
+                addre  background-color: #0e7aee;
+                color: white;
+                text-align: center;
+                padding: 10px 0;
+                position: fixed;
+                bottom: 0;
+                width: 100%ss and create a password. Once you have done that, you will
+                be able to start using PayMate right away!
+              </p>
+            </div>
+          </div>
+          <div class="question">
+            <button class="question-btn">
+              How do I pay my bills with PayMate?
+            </button>
+            <div class="answer">
+              <p>
+                Paying your bills with PayMate is simple! Just log in to your
+                account, select the bill you want to pay, enter the amount you
+                want to pay, and click "Pay". Your bill will be paid instantly!
+              </p>
+            </div>
+          </div>
+          <div class="question">
+            <button class="question-btn">Is PayMate safe to use?</button>
+            <div class="answer">
+              <p>
+                Yes, PayMate is safe to use! We use the latest security
+                technology to protect your information and ensure that your
+                payments are secure. You can trust PayMate to keep your
+                information safe and secure at all times.
+              </p>
+            </div>
+          </div>
+          <div class="question">
+            <button class="question-btn">
+              How do I contact customer service?
+            </button>
+            <div class="answer">
+              <p>
+                If you have any questions or concerns, you can contact our
+                customer service team by email or phone. Our team is available
+                24/7 to help you with any questions or concerns you may have.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 PayMate</p>
+    </footer>
+  </body>
+</html>

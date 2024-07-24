@@ -3,8 +3,7 @@ $(document).ready(function() {
       $(this).next('.answer').slideToggle();
       $(this).toggleClass('active');
     });
-<<<<<<< HEAD
-=======
+
 
     $('a[href="#login"]').click(function(e) {
         e.preventDefault();
@@ -95,8 +94,6 @@ $(document).ready(function() {
         e.preventDefault();
         handleLogout();
     });
-
->>>>>>> a261acb (solved the cors error)
 });
 
   

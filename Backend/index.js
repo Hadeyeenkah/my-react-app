@@ -11,13 +11,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 connectDB();
 
-
-const corsOptions = {
-  origin:'https://my-react-5grlsarfj-cassandra18s-projects.vercel.app',
-  optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -29,9 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-app.options('*', cors(corsOptions));
+app.options('*', cors());
 
 app.use('/api/users', require('./routes/userRoute'));
 

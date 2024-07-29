@@ -1,7 +1,7 @@
 
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
-const User = require('../models/userSchema');
+const UserAccount = require('../dbModels/userAccSchema');
 
 const authenticateUserToken = asyncHandler(async(req, res, next) => {
     let token;
@@ -18,7 +18,7 @@ const authenticateUserToken = asyncHandler(async(req, res, next) => {
             const decoded = jwt.verify(token, process.env.JWT_KEY);
 
             //get  user from token
-            req.user = await User.findById(decoded.id).select('-password');
+            req.user = await UserAccount.findById(decoded.id).select('-password');
 
             next();
         } catch (error) {
@@ -37,4 +37,4 @@ const authenticateUserToken = asyncHandler(async(req, res, next) => {
 });
 
 
-module.exports = { authenticateUserToken };
+module.exports = authenticateUserToken;

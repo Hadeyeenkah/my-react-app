@@ -1,97 +1,166 @@
-
+// Initialize express router
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const User = require('../dbModels/userSchema');
+const UserAccount = require('../dbModels/userAccSchema');
 
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: '30d'})
+    return jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: '30d' })
 };
 
+const userController = {
+    createUser: asyncHandler(async (req, res) => {
+        const { username, email, password, name, phoneNumber } = req.body;
 
-const userController =  {
-
-    createUser:  asyncHandler(async(req, res) => {
-
-        const { username, email, password } = req.body;
-
-
-        if(!username || !email || !password) {
+        if (!username || !email || !password || !phoneNumber) {
             res.status(400);
-            throw new Error('All fields are required!');
-        };
+            throw new Error('Username, email, password, and phone number are required!');
+        }
 
+        const userExist = await UserAccount.findOne({ email });
 
-
-        const userExist = await User.findOne({ email });
-
-        if(userExist) {
+        if (userExist) {
             res.status(400);
-            throw new Error('User already exist')
+            throw new Error('User already exists');
         }
         
         const salt = await bcrypt.genSalt(10);
-
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const newUser = await User.create({
-            username, email, password: hashedPassword
+        const newUser = await UserAccount.create({
+            username,
+            email,
+            password: hashedPassword,
+            name,
+            phoneNumber
         });
 
-        
-        if(newUser) {
+        if (newUser) {
             res.status(201).json({
-                authorId: newUser.id,
+                id: newUser.id,
                 username: newUser.username,
                 email: newUser.email,
-                token: generateToken(newUser.id)
-            })
-
-
+                name: newUser.name,
+                phoneNumber: newUser.phoneNumber
+            });
         } else {
             res.status(400);
-            throw new Error('Invalid data');
-        };
-
+            throw new Error('Invalid user data');
+        }
     }),
 
     loginUser: asyncHandler(async (req, res) => {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        if (!email || !password) {
+            res.status(400);
+            throw new Error('Email and password are required!');
+        }
 
-        if(user && (await bcrypt.compare(password, user.password))) {
+        const user = await UserAccount.findOne({ email });
+
+        if (user && (await bcrypt.compare(password, user.password))) {
             res.json({
-
                 id: user.id,
                 username: user.username,
                 email: user.email,
+                name: user.name,
+                phoneNumber: user.phoneNumber,
                 token: generateToken(user._id)
-            })
-        }
-        else {
-            res.status(400)
-            throw new Error('Invalid credentials')
+            });
+        } else {
+            res.status(400);
+            throw new Error('Invalid credentials');
+
         }
     }),
      
     deleteUser: asyncHandler(async (req, res) => {
-        const userId = req.params.userId;
+        const userId = req.user.id; // Assuming the user can only delete their own account
 
-        const user = await User.findByIdAndDelete(userId);
+        const user = await UserAccount.findByIdAndDelete(userId);
 
-        if(user) {
-            res.status(200).json({message: 'User deleted successfully'})
-        
+        if (user) {
+            res.status(200).json({ message: 'User deleted successfully' });
         } else {
-            res.status(404)
-            throw new Error('User not found:', error);
+            res.status(404);
+            throw new Error('User not found');
         }
     }),
 
-    getMe: asyncHandler(async(req,res) => {
-        res.status(201).json(req.user);
-    })
+    getMe: asyncHandler(async (req, res) => {
+        const user = await UserAccount.findById(req.user.id).select('-password');
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404);
+            throw new Error('User not found');
+        }
+    }),
+
+    getUserProfile: asyncHandler(async (req, res) => {
+        const userId = req.params.userId;
+
+        if (!userId) {
+            res.status(400);
+            throw new Error('User ID is required');
+        }
+
+        const user = await UserAccount.findById(userId).select('-password');
+
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404);
+            throw new Error('User not found');
+        }
+    }),
+
+    updateUser: asyncHandler(async (req, res) => {
+        const { username, email, name, phoneNumber, password } = req.body;
+        const userId = req.user.id;
+    
+        const user = await UserAccount.findById(userId);
+
+        if (!user) {
+            res.status(404);
+            throw new Error('User not found');
+        }
+
+        if (email && email !== user.email) {
+            const emailExists = await UserAccount.findOne({ email });
+            if (emailExists) {
+                res.status(400);
+                throw new Error('Email is already in use');
+            }
+        }
+    
+        user.username = username || user.username;
+        user.email = email || user.email;
+        user.name = name || user.name;
+        user.phoneNumber = phoneNumber || user.phoneNumber;
+
+        if (password) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(password, salt);
+        }
+
+        const updatedUser = await user.save();
+    
+        if (updatedUser) {
+            res.status(200).json({
+                id: updatedUser.id,
+                username: updatedUser.username,
+                email: updatedUser.email,
+                name: updatedUser.name,
+                phoneNumber: updatedUser.phoneNumber
+            });
+        } else {
+            res.status(400);
+            throw new Error('Failed to update user');
+        }
+    }),
 };
+
 module.exports = userController;

@@ -15,18 +15,12 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-  console.log(`Incoming request: ${req.method} ${req.url}`);
-  res.on('finish', () => {
-    console.log(`Response headers: ${JSON.stringify(res.getHeaders())}`);
-  });
-  next();
-});
-
 app.options('*', cors());
 
 app.use('/api/users', require('./routes/userRoute'));
-
+app.use('/api/payment', require('./routes/paymentRoute'));
+app.use('/api/bill-address', require('./routes/billingRoute'));
+app.use('/api/bill-account', require('./routes/billAccountsRoute'));
 app.use(errorHandler);
 
 // Backend start link

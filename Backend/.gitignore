@@ -1,17 +1,2 @@
 node_modules/
 
-fetch('https://my-react-app-v8ai.onrender.com/api/users/register', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  },
-  body: JSON.stringify({
-  username: 'cassandra',
-    email: 'cassandralelei013@gmail.com',
-    password: '12345'
-  })
-})
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error('Error:', error));

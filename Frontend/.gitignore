@@ -1,1 +1,8 @@
 node_modules
+
+{
+  "accounType": "Electricity",
+  "accountNumber": "888880",
+  "provider": "kplc",
+  "amount": "123"
+}

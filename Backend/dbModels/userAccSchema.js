@@ -26,7 +26,6 @@ const billSchema = new mongoose.Schema({
     accountType: { type: String, required: true },
     accountNumber: { type: String, required: true },
     provider: { type: String, required: true },
-    dueDate: { type: Date, required: true },
     amount: { type: Number, required: true },
     status: { type: String, required: true, default: 'pending' } // e.g., pending, paid
   }, { timestamps: true });
@@ -49,7 +48,6 @@ const userAccSchema = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    name: String,
     phoneNumber: { type: String, required: true },
     paymentMethods: [paymentMethodSchema],
     paymentHistory: [paymentHistorySchema],

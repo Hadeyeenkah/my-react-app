@@ -11,7 +11,11 @@ const port = process.env.PORT || 3000;
 const app = express();
 connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://127.0.0.1:5501', // Your frontend origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(bodyParser.json());
 

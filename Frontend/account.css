@@ -92,9 +92,10 @@ nav {
 }
 
 .pay-bills-section h2 {
-    margin: 0;
+    margin-top: 48px;
+    margin-bottom: 36px;
     font-size: 24px;
-
+    text-align: center;
 }
 
 form {

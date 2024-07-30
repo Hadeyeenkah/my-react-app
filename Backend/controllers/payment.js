@@ -8,7 +8,7 @@ const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
 // Initiate a payment transaction for a bill.
 const processPayment = asyncHandler(async (req, res) => {
-    const { paymentMethodId, billId, amount } = req.body;
+    const { billId, amount } = req.body;
     const userId = req.user.id;
 
     const user = await UserAccount.findById(userId);
@@ -17,11 +17,11 @@ const processPayment = asyncHandler(async (req, res) => {
         throw new Error('User not found');
     }
 
-    const paymentMethod = user.paymentMethods.id(paymentMethodId);
-    if (!paymentMethod) {
-        res.status(400);
-        throw new Error('Payment method not found');
-    }
+    // const paymentMethod = user.paymentMethods.id(paymentMethodId);
+    // if (!paymentMethod) {
+    //     res.status(400);
+    //     throw new Error('Payment method not found');
+    // }
 
     const bill = user.bills.id(billId);
     if (!bill) {
@@ -34,17 +34,18 @@ const processPayment = asyncHandler(async (req, res) => {
         email: user.email,
         amount: amount * 100, // convert to kobo
         reference: `paystack_ref_${Date.now()}`,
-        metadata: {
-            paymentMethodId
-        }
+        // metadata: {
+        //     paymentMethodId
+        // }
     }, {
         headers: {
-            Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`
+            Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+            'Content-Type': 'application/json'
         }
     });
 
     const { authorization_url, reference } = response.data.data;
-
+    console.log('Paystack response:', response.data);
     // // Notify user via SMS
     // const smsMessage = `Your payment of ${amount} is being processed. Please complete your payment using this link: ${authorization_url}.`;
     // await sendSMS(user.phoneNumber, smsMessage);

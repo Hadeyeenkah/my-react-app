@@ -9,7 +9,7 @@ router.post('/register', userController.createUser);
 router.post('/login', userController.loginUser);
 
 // Protected routes
-router.use(authenticateUserToken); // Apply authentication to all routes below this line
+router.use(authenticateUserToken);
 
 router.get('/me', userController.getMe);
 router.put('/me', userController.updateUser);

@@ -11,7 +11,7 @@ const generateToken = (id) => {
 
 const userController = {
     createUser: asyncHandler(async (req, res) => {
-        const { username, email, password, name, phoneNumber } = req.body;
+        const { username, email, password, phoneNumber } = req.body;
 
         if (!username || !email || !password || !phoneNumber) {
             res.status(400);
@@ -32,7 +32,6 @@ const userController = {
             username,
             email,
             password: hashedPassword,
-            name,
             phoneNumber
         });
 
@@ -41,8 +40,8 @@ const userController = {
                 id: newUser.id,
                 username: newUser.username,
                 email: newUser.email,
-                name: newUser.name,
-                phoneNumber: newUser.phoneNumber
+                phoneNumber: newUser.phoneNumber,
+                token: generateToken(newUser._id)
             });
         } else {
             res.status(400);

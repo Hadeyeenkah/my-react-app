@@ -25,7 +25,7 @@ $(document).ready(function() {
         const password = $('#login-password').val();
         const data = { email, password };
 
-        fetch('http://localhost:5000/api/users/login', {
+        fetch('https://my-react-app-v8ai.onrender.com/api/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ $(document).ready(function() {
     
         const data = { username, email, password, phoneNumber };
 
-        fetch('http://localhost:5000/api/users/register', {
+        fetch('https://my-react-app-v8ai.onrender.com/api/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

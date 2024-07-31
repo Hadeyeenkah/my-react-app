@@ -1,3 +1,86 @@
 node_modules/
 
 mongodb+srv://tboysammy:Ademuyiwa1@cluster0.n66dwhp.mongodb.net/Paymate?retryWrites=true&w=majority&appName=Cluster0
+
+[
+  {
+    "accountType": "water",
+    "accountNumber": "87878770",
+    "provider": "nawasco",
+    "amount": 200,
+    "status": "pending",
+    "_id": "66a944388f9463b5576e36c9",
+    "createdAt": "2024-07-30T19:51:20.365Z",
+    "updatedAt": "2024-07-30T19:51:20.365Z"
+  },
+  {
+    "accountType": "electricity",
+    "accountNumber": "888880",
+    "provider": "kplc",
+    "amount": 150,
+    "status": "pending",
+    "_id": "66a945e08f9463b5576e36e7",
+    "createdAt": "2024-07-30T19:58:24.451Z",
+    "updatedAt": "2024-07-30T19:58:24.451Z"
+  },
+  {
+    "accountType": "gas",
+    "accountNumber": "123456",
+    "provider": "kgc",
+    "amount": 1200,
+    "status": "pending",
+    "_id": "66a9f2c65f851441f7cc71b5",
+    "createdAt": "2024-07-31T08:16:06.452Z",
+    "updatedAt": "2024-07-31T08:16:06.452Z"
+  },
+  {
+    "accountType": "Netflix",
+    "accountNumber": "89034567",
+    "provider": "netflix",
+    "amount": 600,
+    "status": "paid",
+    "_id": "66a9f609634c9fced34dcd02",
+    "createdAt": "2024-07-31T08:30:01.686Z",
+    "updatedAt": "2024-07-31T08:30:01.686Z"
+  },
+  {
+    "accountType": "prime vedio",
+    "accountNumber": "128945727",
+    "provider": "amazon",
+    "amount": 1200,
+    "status": "pending",
+    "_id": "66a9fa880d8b39ba4bc44d1f",
+    "createdAt": "2024-07-31T08:49:13.007Z",
+    "updatedAt": "2024-07-31T08:49:13.007Z"
+  },
+  {
+    "accountType": "gotv",
+    "accountNumber": "12346",
+    "provider": "go",
+    "amount": 120,
+    "status": "pending",
+    "_id": "66aa12a8faf98f2834107733",
+    "createdAt": "2024-07-31T10:32:08.955Z",
+    "updatedAt": "2024-07-31T10:32:08.955Z"
+  },
+  {
+    "accountType": "water",
+    "accountNumber": "87878770",
+    "provider": "nawasco",
+    "amount": 344,
+    "status": "pending",
+    "_id": "66aa4a470df7a99cff27d4a6",
+    "createdAt": "2024-07-31T14:29:27.160Z",
+    "updatedAt": "2024-07-31T14:29:27.160Z"
+  },
+  {
+    "accountType": "airtime",
+    "accountNumber": "1234638",
+    "provider": "safaricom",
+    "amount": 1000,
+    "status": "pending",
+    "_id": "66aa55d2d20da87f69651e11",
+    "createdAt": "2024-07-31T15:18:42.695Z",
+    "updatedAt": "2024-07-31T15:18:42.695Z"
+  }
+]

@@ -33,10 +33,10 @@ const deleteBillAccount = asyncHandler(async (req, res) => {
 
 // Add a bill to user profile
 const addBill = asyncHandler(async (req, res) => {
-    const { accountType, accountNumber, provider, dueDate, amount, status } = req.body;
+    const { accountType, accountNumber, provider, amount, status } = req.body;
     const userId = req.user.id;
   
-    if (!accountType || !accountNumber || !provider || !dueDate || !amount || !status) {
+    if (!accountType || !accountNumber || !provider || !amount || !status) {
       res.status(400);
       throw new Error('All fields are required');
     }
@@ -46,7 +46,7 @@ const addBill = asyncHandler(async (req, res) => {
     if (user) {
       console.log('User Before:', user);
   
-      user.bills.push({ accountType, accountNumber, provider, dueDate, amount, status });
+      user.bills.push({ accountType, accountNumber, provider, amount, status });
   
       console.log('User After:', user);
   
@@ -61,13 +61,18 @@ const addBill = asyncHandler(async (req, res) => {
 
 
 // Retrieves all pending bills for the user
-const getCurrentBills = asyncHandler(async (req, res) => {
+const getCurrentBill = asyncHandler(async (req, res) => {
+    const { billId } = req.params;
     const userId = req.user.id;
 
     const user = await UserAccount.findById(userId);
     if (user) {
-        const currentBills = user.bills.filter(bill => bill.status === 'pending');
-        res.status(200).json(currentBills);
+        const currentBill = user.bills.id(billId);
+         if (!currentBill) {
+            res.status(404);
+            throw new Error('Bill not found');
+        }
+        res.status(200).json(currentBill);
     } else {
         res.status(404);
         throw new Error('User not found');
@@ -112,27 +117,28 @@ const getBillDetails = asyncHandler(async (req, res) => {
 
 
 //  Update status of a bill e.g from pending to paid
+// In your bill controller file
 const updateBillStatus = asyncHandler(async (req, res) => {
-    const userId = req.user.id;
-    const { billId } = req.params;
-    const { status } = req.body;
+    const { billId, status } = req.body;
 
-    const user = await UserAccount.findById(userId);
-    if (user) {
-        const bill = user.bills.id(billId);
-        if (bill) {
-            bill.status = status;
-            await user.save();
-            res.status(200).json(bill);
-        } else {
-            res.status(404);
-            throw new Error('Bill not found');
-        }
-    } else {
-        res.status(404);
-        throw new Error('User not found');
+    if (!billId || !status) {
+        res.status(400);
+        throw new Error('Bill ID and status are required!');
     }
+
+    const bill = await BillAccount.findById(billId);
+
+    if (!bill) {
+        res.status(404);
+        throw new Error('Bill not found');
+    }
+
+    bill.status = status;
+    await bill.save();
+
+    res.status(200).json({ message: 'Bill status updated successfully' });
 });
 
 
-module.exports = {  getBillAccounts, deleteBillAccount, addBill, getCurrentBills, getPastBills, getBillDetails, updateBillStatus };
+
+module.exports = {  getBillAccounts, deleteBillAccount, addBill, getCurrentBill, getPastBills, getBillDetails, updateBillStatus };

@@ -4,90 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account</title>
-    <link rel="stylesheet" href="./account.css"></link>
-    <link
-    rel="apple-touch-icon"
-    sizes="180x180"
-    href="./assets/icons/apple-touch-icon.png"
-  />
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="32x32"
-    href="./assets/iconsfavicon-32x32.png"
-  />
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="16x16"
-    href="./assets/icons/favicon-16x16.png"
-  />
-  <link rel="manifest" href="./assets/icons/site.webmanifest" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="./account.css"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16x16.png" />
+    <link rel="manifest" href="./assets/icons/site.webmanifest" />
+    <link rel="manifest" href="/site.webmanifest" />
 </head>
 <body>
     <nav class="header">
         <ul class="list">
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./account.html">Account</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="./index.html" class="logout" id="logoutBtn">Logout</a></li>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="./index.html" class="logout" id="logoutBtn">Logout</a></li>
         </ul>
-      </nav>
-
+    </nav>
     
-      <div class="container">
-        <div class="balance-section">
-            <h2>Balance</h2>
-            <p class="balance-amount">N23,000,090.00</p>
-        </div>
+    <div class="container">
+      <div class="welcome-container">
+        <h1 class="welcome-message">Welcome, <span id="username">User</span>!</h1>
+    </div>
+         <!-- Add Bill Section -->
+         <div class="add-bill-section">
+          <h2>Add Bill</h2>
+          <form id="add-bill-form">
+              <label for="accountType">Account Type</label>
+              <input type="text" id="accountType" name="accountType" required>
+              
+              <label for="accountNumber">Account Number</label>
+              <input type="text" id="accountNumber" name="accountNumber" required>
+              
+              <label for="provider">Provider</label>
+              <input type="text" id="provider" name="provider" required>
+              
+              <label for="add-amount">Amount</label>
+              <input type="number" id="add-amount" name="amount" required>
+              
+              <label for="status">Status</label>
+              <select id="status" name="status" required>
+                  <option value="pending">Pending</option>
+                  <option value="paid">Paid</option>
+              </select>
+              
+              <button type="submit">Add Bill</button>
+          </form>
+      </div>
+        
         <div class="pay-bills-section">
             <h2>Pay Bills</h2>
             <form id="pay-bills-form">
-                <label for="bill-type">Bill Type</label>
-                <select id="bill-type" name="bill-type">
-                    <option value="electricity">Electricity</option>
-                    <option value="water">Water</option>
-                    <option value="internet">Internet</option>
-                    <option value="rent">Rent</option>
-                </select>
-                <label for="amount">Amount</label>
-                <input type="number" id="amount" name="amount" placeholder="Enter amount">
-                <button type="submit">Pay</button>
-            </form>
+              <label for="bill-id">Select Bill</label>
+              <select id="bill-id" name="bill-id">
+                  <!-- Options will be populated dynamically -->
+              </select>
+
+
+              <label for="pay-amount">Amount</label>
+              <input type="number" id="pay-amount" name="amount" placeholder="Enter amount" required>
+              
+              <button type="submit">Pay</button>
+          </form>
         </div>
     </div>
-
-      <div class="purchase-history">
-  
-          <tbody id="history-table">
-            <!-- Purchase history will be populated here -->
-          </tbody>
+    
+    <div class="container">
+        
+        <h2>Payment History</h2>
+        <table id="payment-history">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="history-table">
+                <!-- Purchase history will be populated here -->
+            </tbody>
         </table>
-      </div>
     </div>
 
-
-<div class="container">
-  <div class="welcome-container">
-    <h1 class="welcome-message">Welcome, <span id="username">User</span>!</h1>
-</div>
-  <table>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody id="history-table">
-      <!-- Purchase history will be populated here -->
-    </tbody>
-  </table>
-</div>
-
-<script src="./account.js"></script>
-
+    <script src="./account.js"></script>
 </body>
 </html>

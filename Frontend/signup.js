@@ -25,7 +25,7 @@ $(document).ready(function() {
         const password = $('#login-password').val();
         const data = { email, password };
 
-        fetch('https://my-react-app-v8ai.onrender.com/api/users/login', {
+        fetch('http://localhost:5000/api/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -59,12 +59,13 @@ $(document).ready(function() {
         const username = $('#username').val();
         const email = $('#signup-email').val();
         const password = $('#signup-password').val();
+        const phoneNumber = $('#signup-number').val();
         console.log('Email:', email); // Debug statement to check email
         console.log('Password:', password); // Debug statement to check password
     
-        const data = { username, email, password };
+        const data = { username, email, password, phoneNumber };
 
-        fetch('https://my-react-app-v8ai.onrender.com/api/users/register', {
+        fetch('http://localhost:5000/api/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -73,11 +74,11 @@ $(document).ready(function() {
         })
         .then(response => {
             if (!response.ok) {
+                console.error('Registration failed:', response);
                 throw new Error('Registration failed');
-            }
-            else {
-               
+            } else {
                 alert('Thank you for signing up');
+                localStorage.setItem('authToken', data.token);
                 window.location.href = './account.html';
             }
         })
@@ -87,8 +88,8 @@ $(document).ready(function() {
         });
     });
 
-     // Function to handle logout
-     function handleLogout() {
+    // Function to handle logout
+    function handleLogout() {
         // Debugging: Check if handleLogout is called
         console.log("Logout button clicked");
 

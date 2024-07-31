@@ -32,7 +32,7 @@
   /* Navbar */
 nav {
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(139, 185, 237, 0.945);
     padding: 10px 0;
     top: 0;
   }
@@ -45,7 +45,7 @@ nav {
     margin-right: 20px;
   }
   nav ul li a {
-    color: #DCE8FF;
+    color: #091b3d;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
@@ -75,7 +75,12 @@ nav {
     margin: 20px auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+.add-bill-section h2 {
+  margin-top: 48px;
+  margin-bottom: 36px;
+  font-size: 24px;
+  text-align: center;
+}
 .balance-section, .pay-bills-section {
     margin-bottom: 20px;
 }
@@ -134,9 +139,9 @@ button:hover {
 }
 
 .welcome-message {
-  font-size: 2em;
+  font-size: 3em;
   opacity: 0;
-  animation: fadeIn 7s forwards;
+  animation: fadeIn 3s forwards;
 }
 
 @keyframes fadeIn {

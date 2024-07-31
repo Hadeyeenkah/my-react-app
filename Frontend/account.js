@@ -5,6 +5,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+      // Fetch user details
+      async function fetchUserDetails() {
+        try {
+            const response = await fetch('http://localhost:5000/api/users/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+                document.getElementById('username').textContent = user.name;
+            } else {
+                console.error('Error fetching user details:', await response.json());
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    // Initial call to populate user details
+    fetchUserDetails();
+
     const addBillForm = document.getElementById('add-bill-form');
     const payBillsForm = document.getElementById('pay-bills-form');
     const billSelect = document.getElementById('bill-id');
@@ -113,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     alert('Error: Payment URL not found.');
                 }
+                fetchPaymentHistory();
             } else {
                 alert('Error initiating payment: ' + result.message);
             }
@@ -122,6 +147,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initial population of bill dropdown
+     // Fetch and populate payment history
+     async function fetchPaymentHistory() {
+        try {
+            const response = await fetch('http://localhost:5000/api/payment/history', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const paymentHistory = await response.json();
+                console.log('Fetched payment history:', paymentHistory);
+                populatePaymentHistoryTable(paymentHistory);
+            } else {
+                const result = await response.json();
+                alert('Error fetching payment history: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An unexpected error occurred. Please try again.');
+        }
+    }
+
+    // Populate payment history table
+    function populatePaymentHistoryTable(paymentHistory) {
+        const historyTable = document.getElementById('history-table');
+        historyTable.innerHTML = '';
+
+        paymentHistory.forEach(payment => {
+            const row = document.createElement('tr');
+            const dateCell = document.createElement('td');
+            const descriptionCell = document.createElement('td');
+            const amountCell = document.createElement('td');
+
+            dateCell.textContent = new Date(payment.createdAt).toLocaleDateString();
+            descriptionCell.textContent = `Payment for ${payment.billId.accountType} (${payment.billId.provider})`;
+            amountCell.textContent = payment.amount;
+
+            row.appendChild(dateCell);
+            row.appendChild(descriptionCell);
+            row.appendChild(amountCell);
+            historyTable.appendChild(row);
+        });
+    }
+
+    // Initial population of bill dropdown and payment history table
     populateBillSelect();
+    fetchPaymentHistory();
 });

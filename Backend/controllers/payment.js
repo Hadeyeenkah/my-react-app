@@ -1,10 +1,10 @@
 const axios = require('axios');
 const UserAccount = require('../dbModels/userAccSchema');
 const asyncHandler = require('express-async-handler');
-//const sendSMS = require('../utils/message');
+const crypto = require('crypto');
+const { builtinModules } = require('module');
 
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
-
 
 // Initiate a payment transaction for a bill.
 const processPayment = asyncHandler(async (req, res) => {
@@ -17,16 +17,10 @@ const processPayment = asyncHandler(async (req, res) => {
         throw new Error('User not found');
     }
 
-    // const paymentMethod = user.paymentMethods.id(paymentMethodId);
-    // if (!paymentMethod) {
-    //     res.status(400);
-    //     throw new Error('Payment method not found');
-    // }
-
     const bill = user.bills.id(billId);
     if (!bill) {
-        res.status(400);
-        throw new Error('Bill not found');
+        res.status(400).json({ message: 'Bill not found' });
+        return;
     }
 
     // Create a payment initialization with Paystack
@@ -34,9 +28,10 @@ const processPayment = asyncHandler(async (req, res) => {
         email: user.email,
         amount: amount * 100, // convert to kobo
         reference: `paystack_ref_${Date.now()}`,
-        // metadata: {
-        //     paymentMethodId
-        // }
+        metadata: {
+            billId,
+            userId
+        }
     }, {
         headers: {
             Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
@@ -44,78 +39,90 @@ const processPayment = asyncHandler(async (req, res) => {
         }
     });
 
+    
     const { authorization_url, reference } = response.data.data;
-    console.log('Paystack response:', response.data);
-    // // Notify user via SMS
-    // const smsMessage = `Your payment of ${amount} is being processed. Please complete your payment using this link: ${authorization_url}.`;
-    // await sendSMS(user.phoneNumber, smsMessage);
-
-    // Redirect the user to the Paystack payment page
     res.status(200).json({ authorization_url, reference });
 });
 
+// Handle Paystack payment callback
 
-// Confirm a payment transaction initiated by the user.
-const confirmPayment = asyncHandler(async (req, res) => {
-    const { reference } = req.body;
-    const userId = req.user.id;
+const paystackWebhook = asyncHandler(async (req, res) => {
+    const paystackSignature = req.headers['x-paystack-signature'];
+    const event = req.body;
 
-    const user = await UserAccount.findById(userId);
-    if (!user) {
-        res.status(404);
-        throw new Error('User not found');
+    const hash = crypto.createHmac('sha512', PAYSTACK_SECRET_KEY).update(JSON.stringify(event)).digest('hex');
+
+    if (hash !== paystackSignature) {
+        return res.status(400).send('Invalid signature');
     }
 
-    // Verify the transaction status with Paystack
-    const response = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
-        headers: {
-            Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`
+    if (event.event === 'charge.success') {
+        const { reference, amount, metadata } = event.data;
+        const { billId, userId } = metadata;
+
+        try {
+            const response = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
+                headers: {
+                    Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`
+                }
+            });
+
+            if (response.data.status) {
+                const paymentData = response.data.data;
+                const user = await UserAccount.findById(userId);
+
+                if (!user) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+
+                const bill = user.bills.id(billId);
+                if (bill) {
+                    bill.status = 'paid';
+                    const paymentHistory = {
+                        billId: bill._id,
+                        amount: paymentData.amount / 100,
+                        paymentMethod: {
+                            type: 'paystack',
+                            details: { reference }
+                        },
+                        status: 'completed',
+                        receipt: paymentData.receipt_url
+                    };
+                    user.paymentHistory.push(paymentHistory);
+                    await user.save();
+
+                    return res.status(200).send('Payment verified and payment history updated');
+                } else {
+                    return res.status(400).json({ message: 'Bill not found' });
+                }
+            } else {
+                return res.status(400).send('Payment verification failed');
+            }
+        } catch (error) {
+            console.error('Error verifying payment:', error);
+            return res.status(500).send('An error occurred while verifying the payment');
         }
-    });
-
-    const { status, amount, receipt_url, metadata } = response.data.data;
-
-    if (status === 'success') {
-        // Update bill and payment history
-        const bill = user.bills.id(metadata.billId);
-        if (bill) {
-            bill.status = 'paid';
-            const paymentHistory = {
-                billId: bill._id,
-                amount: amount / 100, // convert back to the original currency
-                paymentMethod: {
-                    type: 'paystack',
-                    details: { reference }
-                },
-                status: 'completed',
-                receipt: receipt_url
-            };
-            user.paymentHistory.push(paymentHistory);
-            await user.save();
-
-            res.status(200).json(paymentHistory);
-        } else {
-            res.status(400);
-            throw new Error('Bill not found');
-        }
-    } else {
-        res.status(400);
-        throw new Error('Payment verification failed');
     }
+
+    res.sendStatus(200);
 });
-
 
 // Retrieve the payment history for a user.
 const getPaymentHistory = asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
-    const user = await UserAccount.findById(userId);
-    if (user) {
-        res.status(200).json(user.paymentHistory);
-    } else {
-        res.status(404);
-        throw new Error('User not found');
+    try {
+        const user = await UserAccount.findById(userId);
+        if (user) {
+            console.log('User payment history:', user.paymentHistory);
+            res.status(200).json(user.paymentHistory);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching payment history:', error);
+        res.status(500).json({ message: 'Error fetching payment history' });
     }
 });
 
-module.exports = { processPayment, confirmPayment, getPaymentHistory };
+module.exports = { processPayment, paystackWebhook, getPaymentHistory };

@@ -91,7 +91,7 @@ const userController = {
     getMe: asyncHandler(async (req, res) => {
         const user = await UserAccount.findById(req.user.id).select('-password');
         if (user) {
-            res.status(200).json(user);
+            res.status(200).json({ name: user.username});
         } else {
             res.status(404);
             throw new Error('User not found');

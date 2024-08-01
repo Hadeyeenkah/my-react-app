@@ -25,7 +25,7 @@ $(document).ready(function() {
         const password = $('#login-password').val();
         const data = { email, password };
 
-        fetch('http://localhost:5000/api/users/login', {
+        fetch('https://my-react-app-v8ai.onrender.com/api/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -62,10 +62,12 @@ $(document).ready(function() {
         const phoneNumber = $('#signup-number').val();
         console.log('Email:', email); // Debug statement to check email
         console.log('Password:', password); // Debug statement to check password
-    
+        console.log('username:', username); // Debug statement to check email
+        console.log('Phonenumber:', phoneNumber);
+        
         const data = { username, email, password, phoneNumber };
 
-        fetch('http://localhost:5000/api/users/register', {
+        fetch('https://my-react-app-v8ai.onrender.com/api/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -74,13 +76,17 @@ $(document).ready(function() {
         })
         .then(response => {
             if (!response.ok) {
-                console.error('Registration failed:', response);
-                throw new Error('Registration failed');
-            } else {
-                alert('Thank you for signing up');
-                localStorage.setItem('authToken', data.token);
-                window.location.href = './account.html';
+                return response.json().then(err => {
+                    console.error('Registration failed:', err);
+                    throw new Error(err.message || 'Registration failed');
+                });
             }
+            return response.json();
+        })
+        .then(responseData => {
+            alert('Thank you for signing up');
+            localStorage.setItem('authToken', responseData.token); // Use responseData to get the token
+            window.location.href = './account.html';
         })
         .catch(error => {
             console.error('Error:', error);

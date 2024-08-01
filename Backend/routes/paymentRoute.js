@@ -10,7 +10,7 @@ router.get('/get', authenticateUserToken, getPaymentMethods);
 router.delete('/delete/:paymentMethodId', authenticateUserToken, deletePaymentMethod);
 
 router.post('/process', authenticateUserToken, processPayment);
-router.post('/paystack/webhook', authenticateUserToken, paystackWebhook);
+router.post('/paystack/webhook', paystackWebhook);
 router.get('/history', authenticateUserToken, getPaymentHistory);
 
 module.exports = router;

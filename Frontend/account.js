@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Fetch user details
       async function fetchUserDetails() {
         try {
-            const response = await fetch('http://localhost:5000/api/users/me', {
+            const response = await fetch('https://my-react-app-v8ai.onrender.com/api/users/me', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const status = document.getElementById('status').value;
 
         try {
-            const response = await fetch('http://localhost:5000/api/bill-account/add-bill', {
+            const response = await fetch('https://my-react-app-v8ai.onrender.com/api/bill-account/add-bill', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Populate Bill Dropdown
     async function populateBillSelect() {
         try {
-            const response = await fetch('http://localhost:5000/api/bill-account/get', {
+            const response = await fetch('https://my-react-app-v8ai.onrender.com/api/bill-account/get', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Submitting payment request with:', { billId, amount });
 
         try {
-            const response = await fetch('http://localhost:5000/api/payment/process', {
+            const response = await fetch('https://my-react-app-v8ai.onrender.com/api/payment/process', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
      // Fetch and populate payment history
      async function fetchPaymentHistory() {
         try {
-            const response = await fetch('http://localhost:5000/api/payment/history', {
+            const response = await fetch('https://my-react-app-v8ai.onrender.com/api/payment/history', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`

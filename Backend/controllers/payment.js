@@ -47,10 +47,15 @@ const processPayment = asyncHandler(async (req, res) => {
 // Handle Paystack payment callback
 
 const paystackWebhook = asyncHandler(async (req, res) => {
+    console.log('Received webhook event:', req.body);
     const paystackSignature = req.headers['x-paystack-signature'];
     const event = req.body;
 
     const hash = crypto.createHmac('sha512', PAYSTACK_SECRET_KEY).update(JSON.stringify(event)).digest('hex');
+
+    console.log('Received payload:', event);
+    console.log('Computed hash:', hash);
+    console.log('Provided signature:', paystackSignature);
 
     if (hash !== paystackSignature) {
         return res.status(400).send('Invalid signature');
